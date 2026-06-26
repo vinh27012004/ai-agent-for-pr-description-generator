@@ -7,33 +7,49 @@ Demo kiến trúc **Orchestrator-Worker / prompt-as-config** — mỗi Agent và
 ```
 pr-agent/
 ├── agents/
-│   └── pr-description-agent.md     ← Agent definition (role, goal, workflow)
+│   └── pr-description-agent.md      ← Agent definition (role, goal, workflow)
 ├── skills/
 │   ├── analyze_diff.md              ← Skill: phân tích git diff
-│   ├── generate_pr_description.md  ← Skill: tạo nội dung PR
-│   └── generate_checklist.md       ← Skill: tạo pre-merge checklist
+│   ├── generate_pr_description.md   ← Skill: tạo nội dung PR
+│   └── generate_checklist.md        ← Skill: tạo pre-merge checklist
+├── src/
+│   ├── llm.js                       ← Model layer: load agent+skills, gọi LLM qua 9router
+│   ├── github.js                    ← GitHub REST helpers (lấy diff, update body, comment)
+│   └── server.js                    ← Express webhook server cho event pull_request
 ├── scripts/
-│   └── generate-pr.js              ← CLI runner (Orchestrator)
+│   └── generate-pr.js               ← CLI runner (Orchestrator)
+├── .env.example                     ← Mẫu biến môi trường
 └── package.json
 ```
 
 ## Kiến trúc
 
+Model layer gọi LLM qua **9router** (endpoint OpenAI-compatible), cấu hình hoàn toàn
+bằng biến môi trường (`LLM_BASE_URL`, `LLM_API_KEY`, `LLM_MODEL`) nên không hardcode
+endpoint/key. Có 2 cách chạy: **CLI** (thủ công) và **Webhook server** (tự động trên PR).
+
 ```
-User Input (git diff / commits)
-        ↓
-  [Orchestrator — generate-pr.js]
-        ↓
-  Loads Agent + Skills as system prompt (prompt-as-config)
-        ↓
-  Calls Claude API (claude-sonnet-4-6)
-        ↓
-  Claude follows workflow:
-    1. analyze_diff skill
-    2. generate_pr_description skill  
-    3. generate_checklist skill
-        ↓
-  Output: PR Description Markdown
+                  ┌──────────────────────────────────────────┐
+  CLI:            │  scripts/generate-pr.js  (--diff/--commits)│
+                  └──────────────────┬───────────────────────┘
+                                     │
+  Webhook:  GitHub PR event ─→ src/server.js (verify HMAC) ─┐
+                                     │                       │
+                                     ▼                       ▼
+                          src/llm.js: load Agent + 3 Skills as system prompt
+                                     │            (prompt-as-config)
+                                     ▼
+                       Gọi LLM qua 9router (OpenAI-compatible)
+                                     │
+                       LLM follows workflow trong agent:
+                         1. analyze_diff
+                         2. generate_pr_description
+                         3. generate_checklist
+                                     │
+                                     ▼
+                          Output: PR Description (Markdown)
+                                     │
+              CLI → in ra stdout  •  Webhook → update PR body / post comment
 ```
 
 ## Cách dùng
@@ -42,6 +58,13 @@ User Input (git diff / commits)
 # Install
 npm install
 
+# Cấu hình env (copy mẫu rồi điền key thật vào .env — .env đã được gitignore)
+cp .env.example .env
+```
+
+### Chế độ CLI
+
+```bash
 # Demo với diff có sẵn
 npm run demo
 
@@ -55,6 +78,20 @@ node scripts/generate-pr.js \
   --commits "feat: add JWT refresh token rotation" \
   --why "Ticket SEC-421"
 ```
+
+### Chế độ Webhook server (tự động trên PR)
+
+```bash
+# Chạy server (mặc định cổng 3000)
+npm run server
+```
+
+- Trỏ GitHub webhook tới `POST /webhook`, content type `application/json`,
+  secret khớp với `GITHUB_WEBHOOK_SECRET`, sự kiện **Pull requests**.
+- Server verify chữ ký `X-Hub-Signature-256` (HMAC SHA-256), chỉ xử lý PR
+  `opened`/`reopened`.
+- PR chưa có mô tả → ghi thẳng vào body; PR đã có mô tả → post comment (không ghi đè).
+- Healthcheck: `GET /health`.
 
 ## Output mẫu
 
