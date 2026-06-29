@@ -18,7 +18,7 @@ const client = new OpenAI({
   apiKey: process.env.LLM_API_KEY, // bắt buộc: API key 9router
 });
 
-const MODEL = process.env.LLM_MODEL || "claude-sonnet-4-6";
+const MODEL = process.env.LLM_MODEL;
 
 // --- prompt-as-config: load agent + skills từ file .md ------------------
 export function loadPromptConfig() {
@@ -70,15 +70,17 @@ export async function generateDescription({ diff, commits, why }) {
 
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 2000,
+    max_tokens: 4000,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userMessage },
     ],
   });
 
+  const choice = response.choices[0];
   return {
-    text: response.choices[0]?.message?.content ?? "",
+    text: choice?.message?.content?.trim() ?? "",
+    finishReason: choice?.finish_reason ?? "unknown",
     usage: response.usage,
   };
 }
