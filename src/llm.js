@@ -70,17 +70,15 @@ export async function generateDescription({ diff, commits, why }) {
 
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 4000,
+    max_tokens: 200000,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userMessage },
     ],
   });
 
-  const choice = response.choices[0];
   return {
-    text: choice?.message?.content?.trim() ?? "",
-    finishReason: choice?.finish_reason ?? "unknown",
+    text: response.choices[0]?.message?.content?.trim() ?? "",
     usage: response.usage,
   };
 }

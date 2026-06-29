@@ -60,17 +60,14 @@ app.post("/webhook", async (req, res) => {
     console.log(`▶️  PR #${number} (${owner}/${repo}) — ${title}`);
     const diff = await getPullRequestDiff(owner, repo, number);
 
-    const { text, finishReason, usage } = await generateDescription({
+    const { text, usage } = await generateDescription({
       diff,
       commits: title,
     });
 
-    // Model trả về rỗng (vd hết token khi reasoning, hoặc provider quá tải) -> không post footer trơ
+    // Model trả về rỗng -> không post comment trơ footer
     if (!text) {
-      console.warn(
-        `⚠️  PR #${number}: model trả về rỗng (finish_reason=${finishReason}, ` +
-          `tokens=${usage?.completion_tokens ?? "?"}) -> bỏ qua, không post.`
-      );
+      console.warn(`⚠️  PR #${number}: model trả về rỗng -> bỏ qua, không post.`);
       return;
     }
 
