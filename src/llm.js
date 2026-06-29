@@ -70,7 +70,7 @@ export async function generateDescription({ diff, commits, why }) {
 
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 200000,
+    max_tokens: 8000,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userMessage },
