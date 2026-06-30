@@ -65,9 +65,6 @@ cp .env.example .env
 ### Chế độ CLI
 
 ```bash
-# Demo với diff có sẵn
-npm run demo
-
 # Dùng với git diff thật
 node scripts/generate-pr.js \
   --diff "$(git diff HEAD~1)" \

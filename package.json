@@ -4,7 +4,6 @@
   "description": "AI Agent tạo PR description từ git diff — qua 9router (OpenAI-compatible) + GitHub webhook",
   "type": "module",
   "scripts": {
-    "demo": "node scripts/generate-pr.js --demo",
     "generate": "node scripts/generate-pr.js",
     "server": "node src/server.js"
   },

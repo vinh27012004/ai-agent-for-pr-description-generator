@@ -15,13 +15,12 @@ calls — no HTTP client dependency.
 
 ```bash
 npm install          # install deps
-npm run demo         # run the CLI against a built-in sample diff (no real git/repo needed)
 npm run generate     # CLI: node scripts/generate-pr.js  (pass --diff / --commits / --why)
 npm run server       # start the webhook server (default :3000)
 ```
 
-There is no build step, no linter, and no test suite. `npm run demo` is the fastest way
-to exercise the full prompt pipeline end-to-end.
+There is no build step, no linter, and no test suite. `npm run generate` with a real
+`--diff` is the fastest way to exercise the full prompt pipeline end-to-end.
 
 CLI usage:
 ```bash
