@@ -94,28 +94,28 @@ npm run server
 
 ```markdown
 ## 📋 What Changed
-- Added `generateTokenPair()` to issue access + refresh token together
-- Implemented `rotateRefreshToken()` with automatic reuse detection
-- New POST `/auth/refresh` and `/auth/logout` endpoints
-- Refresh tokens stored hashed in Redis with 7-day TTL
+- Đã thêm `generateTokenPair()` để cấp access token + refresh token cùng lúc
+- Đã hiện thực `rotateRefreshToken()` với cơ chế tự phát hiện tái sử dụng token
+- Thêm endpoint POST `/auth/refresh` và `/auth/logout`
+- Refresh token được lưu dạng hash trong Redis với TTL 7 ngày
 
 ## 💡 Why
-Implements refresh token rotation to prevent token theft attacks.
-When a stolen token is reused, all sessions for that user are invalidated.
+Áp dụng cơ chế xoay vòng refresh token để ngăn tấn công đánh cắp token.
+Khi một token bị đánh cắp được tái sử dụng, toàn bộ session của user đó sẽ bị vô hiệu hóa.
 
 ## 🧪 How to Test
-1. `POST /auth/login` → receive `{ accessToken, refreshToken }`
-2. `POST /auth/refresh` with `{ userId, refreshToken }` → receive new pair
-3. Use the OLD refreshToken again → expect 401 Unauthorized
-4. Verify old session is fully invalidated
+1. `POST /auth/login` → nhận về `{ accessToken, refreshToken }`
+2. `POST /auth/refresh` với `{ userId, refreshToken }` → nhận về cặp token mới
+3. Dùng lại refreshToken CŨ → kỳ vọng trả về 401 Unauthorized
+4. Kiểm tra session cũ đã bị vô hiệu hóa hoàn toàn
 
 ## ✅ Pre-merge Checklist
-- [ ] Code self-reviewed
-- [ ] No debug logs / commented-out code left
-- [ ] PR title follows conventional commits format
-- [ ] Security review requested / self-reviewed
-- [ ] No sensitive data logged or exposed in responses
-- [ ] API contract updated in docs/Swagger/Postman collection
+- [ ] Đã tự review code
+- [ ] Không còn debug log / code bị comment lại
+- [ ] Tiêu đề PR theo đúng format conventional commits
+- [ ] Đã yêu cầu security review / tự review bảo mật
+- [ ] Không log hoặc lộ dữ liệu nhạy cảm trong response
+- [ ] Đã cập nhật API contract trong docs/Swagger/Postman collection
 ```
 
 ## Điểm demo

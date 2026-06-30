@@ -58,7 +58,9 @@ Consequences:
   skill means editing both of those functions in `src/llm.js`, not just dropping a file in
   `skills/`.
 - Much of the prompt content (agent role, constraints, skill bodies) is written in
-  Vietnamese; the model is instructed to produce the PR description in English.
+  Vietnamese. The model is instructed to produce the PR description body in Vietnamese
+  while keeping the section headers (## What Changed, ## Why, ## How to Test,
+  ## Pre-merge Checklist, ## Notes for Reviewers) in English.
 
 ### Flow
 

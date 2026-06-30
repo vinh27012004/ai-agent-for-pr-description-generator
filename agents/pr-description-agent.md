@@ -16,6 +16,7 @@ Nhận vào git diff hoặc commit messages, tạo ra một PR description đầ
 - `generate_checklist` — Tạo pre-merge checklist dựa trên loại thay đổi
 
 ## Constraints
+- Luôn viết **nội dung** bằng tiếng Việt; **giữ nguyên các tiêu đề mục bằng tiếng Anh** (## What Changed, ## Why, ## How to Test, ## Pre-merge Checklist, ## Notes for Reviewers)
 - Không bịa đặt context không có trong diff/commit
 - Nếu thiếu thông tin về "Why", hãy hỏi lại thay vì giả định
 - Checklist phải relevant với loại thay đổi (API, UI, DB migration, v.v.)

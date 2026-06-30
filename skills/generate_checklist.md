@@ -21,54 +21,54 @@ Markdown checklist section.
 ### Base checklist (luôn có)
 ```markdown
 ## ✅ Pre-merge Checklist
-- [ ] Code self-reviewed
-- [ ] No debug logs / commented-out code left
-- [ ] PR title follows conventional commits format
+- [ ] Đã tự review code
+- [ ] Không còn debug log / code bị comment lại
+- [ ] Tiêu đề PR theo đúng format conventional commits
 ```
 
 ### Thêm nếu `test_files_included = false`
 ```markdown
-- [ ] ⚠️ No tests included — explain why in PR description or add tests
+- [ ] ⚠️ Chưa có test — giải thích lý do trong PR description hoặc bổ sung test
 ```
 
 ### Thêm nếu `has_db_migration = true`
 ```markdown
-- [ ] Migration is backward-compatible (old app can run against new schema)
-- [ ] Migration tested on a copy of production data (or staging)
-- [ ] Rollback plan documented
+- [ ] Migration tương thích ngược (app cũ vẫn chạy được với schema mới)
+- [ ] Đã test migration trên bản sao dữ liệu production (hoặc staging)
+- [ ] Đã ghi lại kế hoạch rollback
 ```
 
 ### Thêm nếu `has_api_change = true`
 ```markdown
-- [ ] API contract updated in docs/Swagger/Postman collection
-- [ ] Existing consumers of this endpoint notified (if applicable)
-- [ ] Response shape validated against frontend/mobile expectations
+- [ ] Đã cập nhật API contract trong docs/Swagger/Postman collection
+- [ ] Đã thông báo cho các consumer đang dùng endpoint này (nếu có)
+- [ ] Đã kiểm tra response khớp với mong đợi của frontend/mobile
 ```
 
 ### Thêm nếu `has_breaking_change = true`
 ```markdown
-- [ ] 🚨 BREAKING CHANGE: Version bump required
-- [ ] Migration guide written for dependent services
-- [ ] Deprecation notice added to old behavior
+- [ ] 🚨 BREAKING CHANGE: Cần tăng version
+- [ ] Đã viết hướng dẫn migration cho các service phụ thuộc
+- [ ] Đã thêm thông báo deprecation cho hành vi cũ
 ```
 
 ### Thêm nếu `has_env_change = true`
 ```markdown
-- [ ] New env vars added to `.env.example`
-- [ ] DevOps/infra team notified of new environment variables
-- [ ] Default values are safe for existing deployments
+- [ ] Đã thêm biến env mới vào `.env.example`
+- [ ] Đã thông báo cho team DevOps/infra về các biến môi trường mới
+- [ ] Giá trị mặc định an toàn cho các deployment hiện tại
 ```
 
 ### Thêm nếu `change_type = feat`
 ```markdown
-- [ ] Feature flag considered (for gradual rollout)
-- [ ] Analytics/logging added if needed
+- [ ] Đã cân nhắc dùng feature flag (để rollout từ từ)
+- [ ] Đã thêm analytics/logging nếu cần
 ```
 
 ### Thêm nếu `affected_areas` chứa "auth" hoặc "security"
 ```markdown
-- [ ] Security review requested / self-reviewed
-- [ ] No sensitive data logged or exposed in responses
+- [ ] Đã yêu cầu security review / tự review bảo mật
+- [ ] Không log hoặc lộ dữ liệu nhạy cảm trong response
 ```
 
 ## Notes

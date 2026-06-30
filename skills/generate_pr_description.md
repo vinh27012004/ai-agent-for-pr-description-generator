@@ -21,7 +21,7 @@ Markdown PR description theo template dưới đây.
 
 ## 💡 Why
 <!-- Lý do business/technical, có thể là link ticket -->
-{motivation — nếu không rõ, ghi "See linked issue #___"}
+{motivation — nếu không rõ, ghi "Xem issue liên quan #___"}
 
 ## 🧪 How to Test
 <!-- Step-by-step, reproducible -->
@@ -29,7 +29,7 @@ Markdown PR description theo template dưới đây.
 2. {action}
 3. {expected result}
 
-**Test cases to verify:**
+**Các test case cần kiểm tra:**
 - [ ] {happy path}
 - [ ] {edge case 1}
 - [ ] {edge case 2 nếu relevant}
@@ -40,7 +40,7 @@ Markdown PR description theo template dưới đây.
 ```
 
 ## Instructions
-- **What Changed**: Dùng kết quả `key_changes` từ analyze_diff, viết dưới dạng past tense ("Added...", "Fixed...", "Refactored...")
+- **What Changed**: Dùng kết quả `key_changes` từ analyze_diff, viết bằng tiếng Việt mô tả thay đổi đã thực hiện ("Đã thêm...", "Đã sửa...", "Đã refactor...")
 - **Why**: Nếu có `additional_context` từ user thì dùng. Nếu không có, suy luận từ `change_type` (feat → new capability, fix → bug description, v.v.)
 - **How to Test**: Tạo steps cụ thể dựa trên `affected_areas`. Nếu có API change → curl example. Nếu có UI change → browser steps
 - **Notes**: Chỉ thêm nếu có `has_breaking_change = true` hoặc `has_db_migration = true`

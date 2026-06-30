@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // scripts/generate-pr.js — CLI runner (Orchestrator)
-// Usage: node scripts/generate-pr.js --diff "$(git diff HEAD~1)" [--why "Ticket ABC-123"]
+// Cách dùng: node scripts/generate-pr.js --diff "$(git diff HEAD~1)" [--why "Ticket ABC-123"]
 
 import "dotenv/config";
 import { generateDescription } from "../src/llm.js";
 
+// Đọc các tham số dòng lệnh: --diff, --commits, --why
 function parseArgs() {
   const args = process.argv.slice(2);
   const result = { diff: "", commits: "", why: "" };
