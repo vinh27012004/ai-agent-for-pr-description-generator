@@ -44,6 +44,7 @@ Markdown PR description theo template dưới đây.
 - **Why**: Nếu có `additional_context` từ user thì dùng. Nếu không có, suy luận từ `change_type` (feat → new capability, fix → bug description, v.v.)
 - **How to Test**: Tạo steps cụ thể dựa trên `affected_areas`. Nếu có API change → curl example. Nếu có UI change → browser steps
 - **Notes**: Chỉ thêm nếu có `has_breaking_change = true` hoặc `has_db_migration = true`
+- **Với diff nhỏ/đơn giản**: rút gọn tối đa. What Changed chỉ 1–2 bullets, Why 1 câu (hoặc suy từ `change_type`), How to Test chỉ giữ bước cốt lõi và bỏ các edge-case test không liên quan, bỏ hẳn section Notes. Đừng điền cho đủ template.
 
 ## Tone & Style
 - Kỹ thuật nhưng dễ đọc
