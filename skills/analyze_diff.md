@@ -10,13 +10,13 @@ Phân tích git diff hoặc commit messages để extract các thông tin cấu 
 ## Output (JSON structure)
 ```json
 {
-  "change_type": "feat | fix | refactor | chore | docs | test | perf | breaking",
+  "change_type": "feat | fix | refactor | chore | docs | test | perf",
   "affected_areas": ["auth", "database", "api", "ui", "config", ...],
   "files_changed": ["src/auth/jwt.ts", ...],
-  "summary": "One-line technical summary",
+  "summary": "Tóm tắt kỹ thuật một dòng",
   "key_changes": [
-    "Added refresh token rotation logic in JwtService",
-    "New DB column: users.refresh_token_hash"
+    "Đã thêm logic xoay vòng refresh token trong JwtService",
+    "Thêm cột DB mới: users.refresh_token_hash"
   ],
   "has_breaking_change": false,
   "has_db_migration": true,
@@ -41,3 +41,4 @@ Khi phân tích diff, hãy:
 ## Notes
 - Nếu diff quá lớn (>500 lines), tập trung vào structural changes, bỏ qua formatting-only changes
 - Rename/move file không phải breaking change trừ khi là public API
+- "Breaking" **không phải** một `change_type` — nó trực giao với type (một `feat` vẫn có thể breaking). Luôn giữ `change_type` là loại thật (feat/fix/…) và đánh dấu riêng qua cờ `has_breaking_change`

@@ -20,7 +20,7 @@ Markdown checklist section.
 
 ### Base checklist (luôn có)
 ```markdown
-## ✅ Pre-merge Checklist
+## Pre-merge Checklist
 - [ ] Đã tự review code
 - [ ] Không còn debug log / code bị comment lại
 - [ ] Tiêu đề PR theo đúng format conventional commits

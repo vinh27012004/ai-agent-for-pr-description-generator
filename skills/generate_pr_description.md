@@ -13,17 +13,17 @@ Markdown PR description theo template dưới đây.
 ## Template
 
 ```markdown
-## 📋 What Changed
+## What Changed
 <!-- Súc tích, kỹ thuật, tối đa 5 bullets -->
 - {key_change_1}
 - {key_change_2}
 - ...
 
-## 💡 Why
+## Why
 <!-- Lý do business/technical, có thể là link ticket -->
 {motivation — nếu không rõ, ghi "Xem issue liên quan #___"}
 
-## 🧪 How to Test
+## How to Test
 <!-- Step-by-step, reproducible -->
 1. {setup_step nếu cần}
 2. {action}
@@ -34,7 +34,7 @@ Markdown PR description theo template dưới đây.
 - [ ] {edge case 1}
 - [ ] {edge case 2 nếu relevant}
 
-## ⚠️ Notes for Reviewers
+## Notes for Reviewers
 <!-- Chỉ thêm nếu có điều đặc biệt cần chú ý -->
 {notes hoặc bỏ section này nếu không cần}
 ```
@@ -49,4 +49,4 @@ Markdown PR description theo template dưới đây.
 ## Tone & Style
 - Kỹ thuật nhưng dễ đọc
 - Không viết quá dài — reviewer cần đọc nhanh
-- Dùng emoji headers để scannable (tuỳ team culture, có thể bỏ)
+- Tiêu đề mục (`## ...`) giữ nguyên tiếng Anh, **không thêm emoji** — để khớp đúng bộ header chuẩn. Tăng khả năng scan bằng bullets/bold trong nội dung, không phải bằng emoji ở header

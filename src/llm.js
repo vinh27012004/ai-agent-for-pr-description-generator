@@ -49,7 +49,7 @@ ${config.skillChecklist}
 
 # Final Instructions
 Bạn có đầy đủ 3 skills trên. Khi nhận được git diff và/hoặc commit messages, hãy thực hiện đúng workflow trong Agent definition và trả về PR description hoàn chỉnh bằng Markdown.
-**Viết toàn bộ nội dung bằng tiếng Việt, nhưng giữ nguyên các tiêu đề mục (## What Changed, ## Why, ## How to Test, ## Pre-merge Checklist, ## Notes for Reviewers) bằng tiếng Anh.**
+**Viết toàn bộ nội dung bằng tiếng Việt, nhưng giữ nguyên các tiêu đề mục bằng tiếng Anh (không thêm emoji), đúng thứ tự: ## What Changed, ## Why, ## How to Test, ## Notes for Reviewers, ## Pre-merge Checklist.**
 `;
 }
 
